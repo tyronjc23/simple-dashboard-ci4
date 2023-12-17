@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "dd2aa475-164c-44cf-bd4a-3e0af03d7f76",
+		"name": "Megavision Tech Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23860035"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('response header Content-Type should be application/json', () => {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=UTF-8');",
+							"});",
+							"",
+							"pm.test('response body should be an object', () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson).to.be.an('object');",
+							"});",
+							"",
+							"pm.test('response body should have correct property and value', () => {",
+							"    const responseJson = pm.response.json();",
+							"    ",
+							"    pm.expect(responseJson).to.haveOwnProperty('success');",
+							"    pm.expect(responseJson).to.haveOwnProperty('data');",
+							"",
+							"    pm.expect(responseJson.success).to.be.a('boolean');",
+							"    pm.expect(responseJson.data).to.be.an('object');",
+							"});",
+							"",
+							"pm.test('response body data should contain access token', () => {",
+							"    const responseJson = pm.response.json();",
+							"    const { data } = responseJson;",
+							"",
+							"    pm.expect(data).to.haveOwnProperty('token');",
+							"    pm.expect(data.token).to.not.equals('');",
+							"",
+							"    pm.environment.set('token', data.token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Dec 2023 18:24:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.33"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ci_session=sovpgavbupf64b9d65jkj9k17n2v3q8u; expires=Sun, 17-Dec-2023 20:24:54 GMT; Max-Age=7200; path=/; HttpOnly; SameSite=Lax"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, max-age=0, no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Debugbar-Time",
+							"value": "1702837494.928428"
+						},
+						{
+							"key": "Debugbar-Link",
+							"value": "http://localhost:8080/index.php?debugbar_time=1702837494.928428"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"login success\",\n    \"data\": {\n        \"id\": \"S009\",\n        \"name\": \"Livia Roberts\",\n        \"email\": \"livia.roberts@office.com\",\n        \"phone\": \"+62889648234\",\n        \"office\": \"Bandung\",\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbl9pZCI6ImxpdmlhLnJvYmVydHNAb2ZmaWNlLmNvbSIsImlhdCI6MTcwMjgzNzQ5NCwiZXhwIjoxNzAyODQxMDk0fQ.8eGZT0GSckb9Dj6w7egyFdqZhfikDV7Bk0NUjYqG5v4\"\n    }\n}"
+				},
+				{
+					"name": "failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{email}}1\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Dec 2023 18:25:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.33"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, max-age=0, no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Debugbar-Time",
+							"value": "1702837539.352537"
+						},
+						{
+							"key": "Debugbar-Link",
+							"value": "http://localhost:8080/index.php?debugbar_time=1702837539.352537"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 404,\n    \"error\": 404,\n    \"messages\": {\n        \"error\": \"Akun tidak ditemukan.\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}:{{port}}/api/orders",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "no token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Dec 2023 18:29:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.33"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, max-age=0, no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"JWT Auth failed\"\n}"
+				},
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Dec 2023 18:34:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.33"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, max-age=0, no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Debugbar-Time",
+							"value": "1702838095.683323"
+						},
+						{
+							"key": "Debugbar-Link",
+							"value": "http://localhost:8080/index.php?debugbar_time=1702838095.683323"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"3\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00003\",\n            \"order_date\": \"2023-05-29\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Bryon King\",\n            \"client_email\": \"bryon.king@gmail.com\",\n            \"client_phone\": \"+62897263126264\"\n        },\n        {\n            \"id\": \"14\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00014\",\n            \"order_date\": \"2023-05-30\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Logan Mcnally\",\n            \"client_email\": \"logan.mcnall@gmail.com\",\n            \"client_phone\": \"+628644884562\"\n        },\n        {\n            \"id\": \"16\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00016\",\n            \"order_date\": \"2023-05-30\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Carl Adams\",\n            \"client_email\": \"carl.adams@gmail.com\",\n            \"client_phone\": \"+62862057086127\"\n        },\n        {\n            \"id\": \"17\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00017\",\n            \"order_date\": \"2023-05-30\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Bob Squire\",\n            \"client_email\": \"bob.squi@gmail.com\",\n            \"client_phone\": \"+6286968247525\"\n        },\n        {\n            \"id\": \"46\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00046\",\n            \"order_date\": \"2023-05-31\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Cassidy Eaton\",\n            \"client_email\": \"cassidy.eaton@gmail.com\",\n            \"client_phone\": \"+62839653689\"\n        },\n        {\n            \"id\": \"47\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00047\",\n            \"order_date\": \"2023-05-31\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Gemma Robertson\",\n            \"client_email\": \"gemma.robert@gmail.com\",\n            \"client_phone\": \"+62826268512\"\n        },\n        {\n            \"id\": \"58\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00058\",\n            \"order_date\": \"2023-06-01\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Marjorie Bingham\",\n            \"client_email\": \"marjorie.bingham@gmail.com\",\n            \"client_phone\": \"+628901555120\"\n        },\n        {\n            \"id\": \"68\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00068\",\n            \"order_date\": \"2023-06-02\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Phillip Collingwood\",\n            \"client_email\": \"phillip.collingw@gmail.com\",\n            \"client_phone\": \"+62813762212561\"\n        },\n        {\n            \"id\": \"75\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00075\",\n            \"order_date\": \"2023-06-05\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hazel Knott\",\n            \"client_email\": \"hazel.knott@gmail.com\",\n            \"client_phone\": \"+6289829842283\"\n        },\n        {\n            \"id\": \"101\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00101\",\n            \"order_date\": \"2023-06-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Erick Townend\",\n            \"client_email\": \"erick.townen@gmail.com\",\n            \"client_phone\": \"+6281381124280\"\n        },\n        {\n            \"id\": \"107\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00107\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Noah Dwyer\",\n            \"client_email\": \"noah.dwyer@gmail.com\",\n            \"client_phone\": \"+62873841529896\"\n        },\n        {\n            \"id\": \"124\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00124\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Brooklyn Rees\",\n            \"client_email\": \"brooklyn.rees@gmail.com\",\n            \"client_phone\": \"+6289087738533\"\n        },\n        {\n            \"id\": \"137\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00137\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Savannah Janes\",\n            \"client_email\": \"savannah.janes@gmail.com\",\n            \"client_phone\": \"+62823116804799\"\n        },\n        {\n            \"id\": \"145\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00145\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hadley Clayton\",\n            \"client_email\": \"hadley.clayton@gmail.com\",\n            \"client_phone\": \"+62864815094\"\n        },\n        {\n            \"id\": \"148\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00148\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Trisha Briggs\",\n            \"client_email\": \"trisha.briggs@gmail.com\",\n            \"client_phone\": \"+62851527143291\"\n        },\n        {\n            \"id\": \"149\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00149\",\n            \"order_date\": \"2023-06-06\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Zara Webster\",\n            \"client_email\": \"zara.webst@gmail.com\",\n            \"client_phone\": \"+62833462309294\"\n        },\n        {\n            \"id\": \"166\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00166\",\n            \"order_date\": \"2023-06-07\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Eden Clifford\",\n            \"client_email\": \"eden.cliff@gmail.com\",\n            \"client_phone\": \"+628562305395\"\n        },\n        {\n            \"id\": \"175\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00175\",\n            \"order_date\": \"2023-06-07\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Caleb Shepherd\",\n            \"client_email\": \"caleb.shephe@gmail.com\",\n            \"client_phone\": \"+62823647829\"\n        },\n        {\n            \"id\": \"183\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00183\",\n            \"order_date\": \"2023-06-07\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Catherine Collingwood\",\n            \"client_email\": \"catherine.collingwoo@gmail.com\",\n            \"client_phone\": \"+62874413448\"\n        },\n        {\n            \"id\": \"185\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00185\",\n            \"order_date\": \"2023-06-07\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Bryon Thomson\",\n            \"client_email\": \"bryon.thomso@gmail.com\",\n            \"client_phone\": \"+6285537631734\"\n        },\n        {\n            \"id\": \"196\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00196\",\n            \"order_date\": \"2023-06-07\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"David Bright\",\n            \"client_email\": \"david.bright@gmail.com\",\n            \"client_phone\": \"+62899278759243\"\n        },\n        {\n            \"id\": \"199\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00199\",\n            \"order_date\": \"2023-06-08\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Martin Bullock\",\n            \"client_email\": \"martin.bullock@gmail.com\",\n            \"client_phone\": \"+62810805839925\"\n        },\n        {\n            \"id\": \"204\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00204\",\n            \"order_date\": \"2023-06-08\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Liliana Thornton\",\n            \"client_email\": \"liliana.thornton@gmail.com\",\n            \"client_phone\": \"+628771951035\"\n        },\n        {\n            \"id\": \"206\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00206\",\n            \"order_date\": \"2023-06-08\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Anthony Roscoe\",\n            \"client_email\": \"anthony.roscoe@gmail.com\",\n            \"client_phone\": \"+62852775577\"\n        },\n        {\n            \"id\": \"209\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00209\",\n            \"order_date\": \"2023-06-08\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Moira Marshall\",\n            \"client_email\": \"moira.marsha@gmail.com\",\n            \"client_phone\": \"+6283866683494\"\n        },\n        {\n            \"id\": \"221\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00221\",\n            \"order_date\": \"2023-06-09\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Andrea Ripley\",\n            \"client_email\": \"andrea.ripley@gmail.com\",\n            \"client_phone\": \"+62832604713\"\n        },\n        {\n            \"id\": \"249\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00249\",\n            \"order_date\": \"2023-06-13\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Taylor Hobson\",\n            \"client_email\": \"taylor.hobson@gmail.com\",\n            \"client_phone\": \"+62827121204\"\n        },\n        {\n            \"id\": \"252\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00252\",\n            \"order_date\": \"2023-06-13\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"David Hancock\",\n            \"client_email\": \"david.hancoc@gmail.com\",\n            \"client_phone\": \"+628326860847\"\n        },\n        {\n            \"id\": \"273\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00273\",\n            \"order_date\": \"2023-06-13\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Adeline Preston\",\n            \"client_email\": \"adeline.preston@gmail.com\",\n            \"client_phone\": \"+6288618240790\"\n        },\n        {\n            \"id\": \"284\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00284\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Daniel Thomas\",\n            \"client_email\": \"daniel.thomas@gmail.com\",\n            \"client_phone\": \"+62899300412243\"\n        },\n        {\n            \"id\": \"289\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00289\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Alexander Cork\",\n            \"client_email\": \"alexander.cork@gmail.com\",\n            \"client_phone\": \"+62827113588876\"\n        },\n        {\n            \"id\": \"295\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00295\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hailey Willson\",\n            \"client_email\": \"hailey.willson@gmail.com\",\n            \"client_phone\": \"+62883167237\"\n        },\n        {\n            \"id\": \"308\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00308\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Adeline Gilmore\",\n            \"client_email\": \"adeline.gilmore@gmail.com\",\n            \"client_phone\": \"+62832041191988\"\n        },\n        {\n            \"id\": \"315\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00315\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Lana Stewart\",\n            \"client_email\": \"lana.stewa@gmail.com\",\n            \"client_phone\": \"+62867662449018\"\n        },\n        {\n            \"id\": \"325\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00325\",\n            \"order_date\": \"2023-06-14\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Lauren Kelly\",\n            \"client_email\": \"lauren.kelly@gmail.com\",\n            \"client_phone\": \"+62889689609\"\n        },\n        {\n            \"id\": \"341\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00341\",\n            \"order_date\": \"2023-06-15\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Bart Stevens\",\n            \"client_email\": \"bart.steve@gmail.com\",\n            \"client_phone\": \"+62820038748285\"\n        },\n        {\n            \"id\": \"342\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00342\",\n            \"order_date\": \"2023-06-15\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Martin Adler\",\n            \"client_email\": \"martin.adler@gmail.com\",\n            \"client_phone\": \"+628970787760\"\n        },\n        {\n            \"id\": \"354\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00354\",\n            \"order_date\": \"2023-06-15\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Alba Faulkner\",\n            \"client_email\": \"alba.faulk@gmail.com\",\n            \"client_phone\": \"+6286863647847\"\n        },\n        {\n            \"id\": \"357\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00357\",\n            \"order_date\": \"2023-06-16\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Denis Blackwall\",\n            \"client_email\": \"denis.blackw@gmail.com\",\n            \"client_phone\": \"+6289552701298\"\n        },\n        {\n            \"id\": \"358\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00358\",\n            \"order_date\": \"2023-06-16\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Aleksandra Lunt\",\n            \"client_email\": \"aleksandra.lunt@gmail.com\",\n            \"client_phone\": \"+6286982786321\"\n        },\n        {\n            \"id\": \"410\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00410\",\n            \"order_date\": \"2023-06-19\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"John Reynolds\",\n            \"client_email\": \"john.reyno@gmail.com\",\n            \"client_phone\": \"+6281371839097\"\n        },\n        {\n            \"id\": \"416\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00416\",\n            \"order_date\": \"2023-06-20\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Javier Potts\",\n            \"client_email\": \"javier.potts@gmail.com\",\n            \"client_phone\": \"+62872586410323\"\n        },\n        {\n            \"id\": \"440\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00440\",\n            \"order_date\": \"2023-06-20\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Camellia Walton\",\n            \"client_email\": \"camellia.walton@gmail.com\",\n            \"client_phone\": \"+6287742486802\"\n        },\n        {\n            \"id\": \"456\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00456\",\n            \"order_date\": \"2023-06-20\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Juliette Rogan\",\n            \"client_email\": \"juliette.rogan@gmail.com\",\n            \"client_phone\": \"+628161080657\"\n        },\n        {\n            \"id\": \"457\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00457\",\n            \"order_date\": \"2023-06-20\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Ivette Fall\",\n            \"client_email\": \"ivette.fall@gmail.com\",\n            \"client_phone\": \"+62896744494085\"\n        },\n        {\n            \"id\": \"476\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00476\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Jessica Uttley\",\n            \"client_email\": \"jessica.uttley@gmail.com\",\n            \"client_phone\": \"+628178654457\"\n        },\n        {\n            \"id\": \"480\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00480\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Clarissa Bayliss\",\n            \"client_email\": \"clarissa.bayliss@gmail.com\",\n            \"client_phone\": \"+6281827881938\"\n        },\n        {\n            \"id\": \"494\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00494\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Madelyn Price\",\n            \"client_email\": \"madelyn.price@gmail.com\",\n            \"client_phone\": \"+6285007953152\"\n        },\n        {\n            \"id\": \"504\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00504\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Juliette Weatcroft\",\n            \"client_email\": \"juliette.weatcroft@gmail.com\",\n            \"client_phone\": \"+62884438117702\"\n        },\n        {\n            \"id\": \"510\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00510\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Christy Collingwood\",\n            \"client_email\": \"christy.collingw@gmail.com\",\n            \"client_phone\": \"+62891075450930\"\n        },\n        {\n            \"id\": \"523\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00523\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Maddison Murphy\",\n            \"client_email\": \"maddison.murphy@gmail.com\",\n            \"client_phone\": \"+62863699455196\"\n        },\n        {\n            \"id\": \"531\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00531\",\n            \"order_date\": \"2023-06-21\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Percy Dyson\",\n            \"client_email\": \"percy.dyson@gmail.com\",\n            \"client_phone\": \"+628551990735\"\n        },\n        {\n            \"id\": \"561\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00561\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Emma Thomson\",\n            \"client_email\": \"emma.thoms@gmail.com\",\n            \"client_phone\": \"+628308720543\"\n        },\n        {\n            \"id\": \"569\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00569\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Benjamin Gibson\",\n            \"client_email\": \"benjamin.gibson@gmail.com\",\n            \"client_phone\": \"+62897730636\"\n        },\n        {\n            \"id\": \"590\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00590\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Tara Clifford\",\n            \"client_email\": \"tara.cliff@gmail.com\",\n            \"client_phone\": \"+62899606578767\"\n        },\n        {\n            \"id\": \"603\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00603\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Logan Graves\",\n            \"client_email\": \"logan.graves@gmail.com\",\n            \"client_phone\": \"+628547265333\"\n        },\n        {\n            \"id\": \"605\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00605\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Alison Robinson\",\n            \"client_email\": \"alison.robinso@gmail.com\",\n            \"client_phone\": \"+6285299294537\"\n        },\n        {\n            \"id\": \"609\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00609\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Barry Reid\",\n            \"client_email\": \"barry.reid@gmail.com\",\n            \"client_phone\": \"+62869048872414\"\n        },\n        {\n            \"id\": \"615\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00615\",\n            \"order_date\": \"2023-06-22\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Matt Tennant\",\n            \"client_email\": \"matt.tenna@gmail.com\",\n            \"client_phone\": \"+6289116828361\"\n        },\n        {\n            \"id\": \"632\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00632\",\n            \"order_date\": \"2023-06-23\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Jaylene Torres\",\n            \"client_email\": \"jaylene.torres@gmail.com\",\n            \"client_phone\": \"+62889681355\"\n        },\n        {\n            \"id\": \"638\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00638\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Samantha Nayler\",\n            \"client_email\": \"samantha.nayler@gmail.com\",\n            \"client_phone\": \"+6289141988644\"\n        },\n        {\n            \"id\": \"642\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00642\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Denny Wooldridge\",\n            \"client_email\": \"denny.wooldr@gmail.com\",\n            \"client_phone\": \"+62864675680\"\n        },\n        {\n            \"id\": \"645\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00645\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Paige Griffiths\",\n            \"client_email\": \"paige.griffi@gmail.com\",\n            \"client_phone\": \"+62860222147053\"\n        },\n        {\n            \"id\": \"663\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00663\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Isla Gonzales\",\n            \"client_email\": \"isla.gonza@gmail.com\",\n            \"client_phone\": \"+628185431941\"\n        },\n        {\n            \"id\": \"672\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00672\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Fred James\",\n            \"client_email\": \"fred.james@gmail.com\",\n            \"client_phone\": \"+6282371674142\"\n        },\n        {\n            \"id\": \"683\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00683\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Josh Khan\",\n            \"client_email\": \"josh.khan@gmail.com\",\n            \"client_phone\": \"+62866898797\"\n        },\n        {\n            \"id\": \"690\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00690\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Eryn Hall\",\n            \"client_email\": \"eryn.hall@gmail.com\",\n            \"client_phone\": \"+628152942342\"\n        },\n        {\n            \"id\": \"694\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00694\",\n            \"order_date\": \"2023-06-26\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Mackenzie Morley\",\n            \"client_email\": \"mackenzie.morley@gmail.com\",\n            \"client_phone\": \"+6287152435035\"\n        },\n        {\n            \"id\": \"705\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00705\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Lucas Holt\",\n            \"client_email\": \"lucas.holt@gmail.com\",\n            \"client_phone\": \"+62838441302\"\n        },\n        {\n            \"id\": \"707\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00707\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Bethany Chapman\",\n            \"client_email\": \"bethany.chapman@gmail.com\",\n            \"client_phone\": \"+62835052107011\"\n        },\n        {\n            \"id\": \"719\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00719\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Leilani Norman\",\n            \"client_email\": \"leilani.norman@gmail.com\",\n            \"client_phone\": \"+62850784568\"\n        },\n        {\n            \"id\": \"720\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00720\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Alan Russell\",\n            \"client_email\": \"alan.russe@gmail.com\",\n            \"client_phone\": \"+628252815815\"\n        },\n        {\n            \"id\": \"723\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00723\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Sabina Allcott\",\n            \"client_email\": \"sabina.allcott@gmail.com\",\n            \"client_phone\": \"+628281080598\"\n        },\n        {\n            \"id\": \"727\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00727\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Noah Ianson\",\n            \"client_email\": \"noah.ianso@gmail.com\",\n            \"client_phone\": \"+628310618400\"\n        },\n        {\n            \"id\": \"729\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00729\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Lorraine Yoman\",\n            \"client_email\": \"lorraine.yoman@gmail.com\",\n            \"client_phone\": \"+62863818887786\"\n        },\n        {\n            \"id\": \"764\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00764\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hayden Stewart\",\n            \"client_email\": \"hayden.stewart@gmail.com\",\n            \"client_phone\": \"+62850118877788\"\n        },\n        {\n            \"id\": \"771\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00771\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Peter Nicholls\",\n            \"client_email\": \"peter.nichol@gmail.com\",\n            \"client_phone\": \"+62882871227662\"\n        },\n        {\n            \"id\": \"779\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00779\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Molly Hall\",\n            \"client_email\": \"molly.hall@gmail.com\",\n            \"client_phone\": \"+62865987058888\"\n        },\n        {\n            \"id\": \"781\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00781\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"David Flett\",\n            \"client_email\": \"david.flett@gmail.com\",\n            \"client_phone\": \"+628373445687\"\n        },\n        {\n            \"id\": \"784\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00784\",\n            \"order_date\": \"2023-06-27\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Mandy Chadwick\",\n            \"client_email\": \"mandy.chadwi@gmail.com\",\n            \"client_phone\": \"+628764918873\"\n        },\n        {\n            \"id\": \"822\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00822\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Felicity Jenkins\",\n            \"client_email\": \"felicity.jenkins@gmail.com\",\n            \"client_phone\": \"+62834467016696\"\n        },\n        {\n            \"id\": \"824\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00824\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Shannon Stark\",\n            \"client_email\": \"shannon.stark@gmail.com\",\n            \"client_phone\": \"+62888472599\"\n        },\n        {\n            \"id\": \"826\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00826\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Ryan Simpson\",\n            \"client_email\": \"ryan.simps@gmail.com\",\n            \"client_phone\": \"+62829499007\"\n        },\n        {\n            \"id\": \"834\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00834\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Ethan Owen\",\n            \"client_email\": \"ethan.owen@gmail.com\",\n            \"client_phone\": \"+62894065876171\"\n        },\n        {\n            \"id\": \"837\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00837\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Mason Clark\",\n            \"client_email\": \"mason.clark@gmail.com\",\n            \"client_phone\": \"+62839237092\"\n        },\n        {\n            \"id\": \"840\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00840\",\n            \"order_date\": \"2023-06-28\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Clarissa Amstead\",\n            \"client_email\": \"clarissa.amstead@gmail.com\",\n            \"client_phone\": \"+62898271781467\"\n        },\n        {\n            \"id\": \"846\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00846\",\n            \"order_date\": \"2023-06-29\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Owen Powell\",\n            \"client_email\": \"owen.powel@gmail.com\",\n            \"client_phone\": \"+62886559688397\"\n        },\n        {\n            \"id\": \"863\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00863\",\n            \"order_date\": \"2023-06-29\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Dalia Casey\",\n            \"client_email\": \"dalia.casey@gmail.com\",\n            \"client_phone\": \"+6282073656282\"\n        },\n        {\n            \"id\": \"867\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00867\",\n            \"order_date\": \"2023-06-29\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Domenic Pope\",\n            \"client_email\": \"domenic.pope@gmail.com\",\n            \"client_phone\": \"+62897562382\"\n        },\n        {\n            \"id\": \"878\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00878\",\n            \"order_date\": \"2023-06-30\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hayden Wilde\",\n            \"client_email\": \"hayden.wilde@gmail.com\",\n            \"client_phone\": \"+62833217790547\"\n        },\n        {\n            \"id\": \"892\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00892\",\n            \"order_date\": \"2023-06-30\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Allison Murphy\",\n            \"client_email\": \"allison.murphy@gmail.com\",\n            \"client_phone\": \"+62870031939514\"\n        },\n        {\n            \"id\": \"905\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00905\",\n            \"order_date\": \"2023-07-03\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Leilani Truscott\",\n            \"client_email\": \"leilani.truscott@gmail.com\",\n            \"client_phone\": \"+62853441610884\"\n        },\n        {\n            \"id\": \"911\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00911\",\n            \"order_date\": \"2023-07-03\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Tess Dickson\",\n            \"client_email\": \"tess.dicks@gmail.com\",\n            \"client_phone\": \"+62879657873\"\n        },\n        {\n            \"id\": \"918\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00918\",\n            \"order_date\": \"2023-07-03\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Trisha Shaw\",\n            \"client_email\": \"trisha.shaw@gmail.com\",\n            \"client_phone\": \"+628639801537\"\n        },\n        {\n            \"id\": \"922\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00922\",\n            \"order_date\": \"2023-07-03\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Phillip Thatcher\",\n            \"client_email\": \"phillip.thatcher@gmail.com\",\n            \"client_phone\": \"+62830299197\"\n        },\n        {\n            \"id\": \"929\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00929\",\n            \"order_date\": \"2023-07-03\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Mark Forth\",\n            \"client_email\": \"mark.forth@gmail.com\",\n            \"client_phone\": \"+628870947484\"\n        },\n        {\n            \"id\": \"932\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00932\",\n            \"order_date\": \"2023-07-04\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Cedrick Stuart\",\n            \"client_email\": \"cedrick.stuart@gmail.com\",\n            \"client_phone\": \"+62827248321\"\n        },\n        {\n            \"id\": \"941\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00941\",\n            \"order_date\": \"2023-07-04\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Michaela Hastings\",\n            \"client_email\": \"michaela.hastings@gmail.com\",\n            \"client_phone\": \"+628213908186\"\n        },\n        {\n            \"id\": \"945\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00945\",\n            \"order_date\": \"2023-07-04\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Barney Paterson\",\n            \"client_email\": \"barney.paterso@gmail.com\",\n            \"client_phone\": \"+628343639641\"\n        },\n        {\n            \"id\": \"955\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00955\",\n            \"order_date\": \"2023-07-04\",\n            \"order_item\": \"Item B\",\n            \"order_amount\": \"500000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Barry Vane\",\n            \"client_email\": \"barry.vane@gmail.com\",\n            \"client_phone\": \"+6286596923489\"\n        },\n        {\n            \"id\": \"964\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00964\",\n            \"order_date\": \"2023-07-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Tony Stanley\",\n            \"client_email\": \"tony.stanl@gmail.com\",\n            \"client_phone\": \"+6289368688223\"\n        },\n        {\n            \"id\": \"969\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00969\",\n            \"order_date\": \"2023-07-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Lucas Hopkins\",\n            \"client_email\": \"lucas.hopkin@gmail.com\",\n            \"client_phone\": \"+62813182979425\"\n        },\n        {\n            \"id\": \"973\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00973\",\n            \"order_date\": \"2023-07-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Allison Morgan\",\n            \"client_email\": \"allison.morgan@gmail.com\",\n            \"client_phone\": \"+628147022090\"\n        },\n        {\n            \"id\": \"975\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00975\",\n            \"order_date\": \"2023-07-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Hank Lloyd\",\n            \"client_email\": \"hank.lloyd@gmail.com\",\n            \"client_phone\": \"+6288522026417\"\n        },\n        {\n            \"id\": \"977\",\n            \"employee_id\": \"S009\",\n            \"client_id\": \"C00977\",\n            \"order_date\": \"2023-07-05\",\n            \"order_item\": \"Item A\",\n            \"order_amount\": \"200000\",\n            \"sales_name\": \"Livia Roberts\",\n            \"sales_phone\": \"+62889648234\",\n            \"sales_email\": \"livia.roberts@office.com\",\n            \"office\": \"Bandung\",\n            \"client_name\": \"Nathan Allington\",\n            \"client_email\": \"nathan.allingt@gmail.com\",\n            \"client_phone\": \"+62839119220472\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "success - no data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Dec 2023 18:36:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.33"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, OPTIONS, PUT, DELETE"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, max-age=0, no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ci_session=6jsbbc0ggmi7mi35cfsqfttve1uufv82; expires=Sun, 17-Dec-2023 20:36:14 GMT; Max-Age=7200; path=/; HttpOnly; SameSite=Lax"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Debugbar-Time",
+							"value": "1702838174.485132"
+						},
+						{
+							"key": "Debugbar-Link",
+							"value": "http://localhost:8080/index.php?debugbar_time=1702838174.485132"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": []\n}"
+				}
+			]
+		}
+	]
+}

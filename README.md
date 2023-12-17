@@ -25,6 +25,10 @@ composer install --no-dev
 Copy `env` to `.env` for custom setup. Original setup from `env` using hostname `localhost`, database name `mega_test_ci4`
 username and password `root`, and port 3306.
 
+## REST APIs
+
+Import to postman `Megavision Tech Test API.postman_collection.json` and `Megavision API Env.postman_environment.json` files for using API endpoints.
+
 ### Migration
 
 Create new database
@@ -52,6 +56,27 @@ php spark serve
 ```
 
 Application running at [localhost:8080](http://localhost:8080).
+
+## User Accounts
+
+| username                | Password |
+| ----------------------- | -------- |
+| admin@office.com        | admin    |
+| martin.lloyd@office.com | S001     |
+| john.hobson@office.com  | S002     |
+| ...                     | ...      |
+| ...                     | ...      |
+| ...                     | ...      |
+| jane.bell@office.com    | S010     |
+
+## Documentations
+
+| file                                             | Ket                     |
+| ------------------------------------------------ | ----------------------- |
+| ERD.drawio                                       | Database schema         |
+| data-test.csv                                    | dummy data              |
+| Megavision Tech Test API.postman_collection.json | Postman API Collection  |
+| Megavision API Env.postman_environment.json      | Postman API Environment |
 
 ## Server Requirements
 
