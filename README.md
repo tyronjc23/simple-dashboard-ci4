@@ -22,8 +22,12 @@ composer install --no-dev
 
 ## Setup
 
-Copy `env` to `.env` for custom setup. Original setup from `env` using hostname `localhost`, database name `mega_test_ci4`
+Copy or rename `env` to `.env` file. Original setup from `env` using hostname `localhost`, database name `mega_test_ci4`
 username and password `root`, and port 3306.
+
+```
+cp env .env
+```
 
 ## REST APIs
 

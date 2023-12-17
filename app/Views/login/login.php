@@ -75,7 +75,8 @@
 
 				if (response.success) window.location.replace("/");
 			} catch (error) {
-				error.status === 500 ? alert(error.responseJSON.message) : alert(error.responseJSON.messages.error);
+				console.error(error);
+				error.status === 500 ? alert(error.statusText) : alert(error.responseJSON.messages.error);
 			}
 		}
 	</script>
