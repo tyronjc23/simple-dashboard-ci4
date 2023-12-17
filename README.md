@@ -29,6 +29,8 @@ username and password `root`, and port 3306.
 
 Import to postman `Megavision Tech Test API.postman_collection.json` and `Megavision API Env.postman_environment.json` files for using API endpoints.
 
+API using JWT Token for authentifications.
+
 ### Migration
 
 Create new database
