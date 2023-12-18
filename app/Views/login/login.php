@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="<?= base_url('assets/css/adminlte.min.css') ?>">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition login-page">
@@ -48,7 +48,7 @@
 
 	<script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-	<script src="<?= base_url('assets/js/adminlte.min.js') ?>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
 	<script type="text/javascript">
 		$('body').on('keydown', '#username', handleKeyPress)
