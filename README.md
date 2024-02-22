@@ -22,7 +22,7 @@ composer install --no-dev
 
 ## Setup
 
-Copy or rename `env` to `.env` file. Original setup from `env` using hostname `localhost`, database name `mega_test_ci4`
+Copy or rename `env` to `.env` file. Original setup from `env` using hostname `localhost`, database name `simple_dashboard`
 username and password `root`, and port 3306.
 
 ```
@@ -40,7 +40,7 @@ API using JWT Token for authentifications.
 Create new database
 
 ```
-php spark db:create mega_test_ci4
+php spark db:create simple_dashboard
 ```
 
 Database migration
